@@ -36,6 +36,16 @@ public class Conta {
         this.historico.insereLancamento(new Lancamento(operacaoBancaria, -valor));
         return  true;
     }
+    public boolean transferencia(double valor, int senha, Conta destino) {
+        if(!senhaEhValida(senha) | valor > this.saldo | valor < 0) {
+            return false;
+        }
+        this.saldo -= valor;
+        this.historico.insereLancamento(new Lancamento("Transferencia", -valor));
+        destino.creditaValor(valor, "Transferencia");
+        return true;
+    
+    }
     public boolean creditaValor(double valor, String operacaoBancaria) {
         if(valor < 0) {
             return false;
