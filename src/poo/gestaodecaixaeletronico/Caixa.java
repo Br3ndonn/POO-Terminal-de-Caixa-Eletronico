@@ -1,6 +1,7 @@
 package poo.gestaodecaixaeletronico;
 
 import poo.gestaodecontas.Conta;
+import poo.gestaodecontas.Lancamento;
 
 public class Caixa {
     private Terminal meuTerminal;
@@ -33,6 +34,16 @@ public class Caixa {
         if(this.saldo < 500){
             this.meuTerminal.setModo(0);
         }
+        return true;
+    }
+    public boolean transferencia(int numeroContaPagadora, int numeroContaDestino, double valor, int senha) {
+        Conta pagadora = bdContas.buscaConta(numeroContaPagadora);
+        Conta destino = bdContas.buscaConta(numeroContaDestino);
+        if (pagadora == null || destino == null || !pagadora.debitaValor(valor, senha, "Transferencia")){
+            return false;
+        }
+        pagadora.debitaValor(valor, senha, "Transferencia");
+        destino.creditaValor(valor, "Transferencia");
         return true;
     }
     public void recarrega() {

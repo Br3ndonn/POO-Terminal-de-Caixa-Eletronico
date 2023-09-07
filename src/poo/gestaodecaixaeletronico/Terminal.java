@@ -13,7 +13,7 @@ public class Terminal {
         int opcao;
 
         opcao = this.getOpcao();
-        while(opcao != 4) {
+        while(opcao != 8) {
             switch (opcao) {
                 case 1: double saldo = this.meuCaixa.consultaSaldo(getInt("Numero da Conta"), getInt("Senha"));
                     if(saldo != -1) {
@@ -30,6 +30,13 @@ public class Terminal {
                     }
                     break;
                 case 3: this.meuCaixa.recarrega();
+                    break;
+                case 4: boolean c = this.meuCaixa.transferencia(getInt("Conta pagadora"), getInt("Conta destino"), (double) getInt("Valor"), getInt("Senha"));
+                    if(c) {
+                        System.out.println("Transferencia realizada");
+                    } else {
+                        System.out.println("Erro na transferencia");
+                    }
             }
             opcao = getOpcao();
         }
@@ -45,12 +52,12 @@ public class Terminal {
         int opcao = 0;
         do {
             if(this.modoAtual == 1) {
-                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Sair");
-                if(opcao != 1 & opcao != 2 & opcao != 4) {
+                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Transferencia, 8 - Sair");
+                if(opcao != 1 & opcao != 2 & opcao != 4 & opcao != 8) {
                     opcao = 0;
                 }else {
-                    opcao = getInt("Opcao: 3 - Recarrega, 4 - Sair");
-                    if(opcao != 3 & opcao != 4) {
+                    opcao = getInt("Opcao: 3 - Recarrega, 8 - Sair");
+                    if(opcao != 3 & opcao != 4 & opcao != 8) {
                         opcao = 0;
                     }
                 }
