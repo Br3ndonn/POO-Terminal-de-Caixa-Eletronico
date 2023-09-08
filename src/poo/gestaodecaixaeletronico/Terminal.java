@@ -1,5 +1,4 @@
 package poo.gestaodecaixaeletronico;
-
 import java.util.Scanner;
 
 public class Terminal {
@@ -9,6 +8,7 @@ public class Terminal {
     public Terminal(CadastroContas bd) {
         this.meuCaixa = new Caixa(this, bd);
     }
+
     public void iniciaOperacao() {
         int opcao;
 
@@ -37,6 +37,21 @@ public class Terminal {
                     } else {
                         System.out.println("Erro na transferencia");
                     }
+                    break;
+                case 5: boolean d = this.meuCaixa.depositoEmEnvelope(getInt("Conta destino"), getInt("Valor"));
+                    if(d) {
+                        System.out.println("Transferencia realizada");
+                    } else{
+                        System.out.println("Erro na transferencia");
+                    }
+                    break;
+                case 6: boolean e = this.meuCaixa.depositoEmDinheiro(getInt("Conta destino"), getInt("Valor"));
+                    if(e) {
+                        System.out.println("Transferencia realizada");
+                    } else {
+                        System.out.println("Erro na transferencia");
+                    }
+                    break;
             }
             opcao = getOpcao();
         }
@@ -52,12 +67,14 @@ public class Terminal {
         int opcao = 0;
         do {
             if(this.modoAtual == 1) {
-                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Transferencia, 8 - Sair");
-                if(opcao != 1 & opcao != 2 & opcao != 4 & opcao != 8) {
+                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Transferencia,"
+                                        + "5 - Deposito(Envelope), 6- Deposito(Dinheiro),"
+                                        + "7 - Extrato, 8 - Sair");
+                if(opcao != 1 & opcao != 2 & opcao != 4 & opcao != 5 & opcao != 6 & opcao != 7 & opcao != 8) {
                     opcao = 0;
                 }else {
                     opcao = getInt("Opcao: 3 - Recarrega, 8 - Sair");
-                    if(opcao != 3 & opcao != 4 & opcao != 8) {
+                    if(opcao != 3 & opcao != 8) {
                         opcao = 0;
                     }
                 }

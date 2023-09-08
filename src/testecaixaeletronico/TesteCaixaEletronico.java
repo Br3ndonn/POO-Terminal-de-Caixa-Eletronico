@@ -1,7 +1,6 @@
 package testecaixaeletronico;
-import poo.gestaodecaixaeletronico.*;
 import poo.gestaodecontas.*;
-
+import poo.gestaodecaixaeletronico.*;
 public class TesteCaixaEletronico {
     public static void main(String[] args) {
         Conta c1 = new Conta(1, new Cliente("12345", "Joao"), 123, 1000);
@@ -14,13 +13,5 @@ public class TesteCaixaEletronico {
 
         Terminal t = new Terminal(cad);
         t.iniciaOperacao();
-        //System.out.println(c1);
-        //System.out.println(c2);
-        //System.out.println(c3);
-        //c1.transferencia(400,123, c2);
-        //System.out.println(c1.varificaSaldo(123));
-        //System.out.println(c2.varificaSaldo(123));
-
-
     }
 }

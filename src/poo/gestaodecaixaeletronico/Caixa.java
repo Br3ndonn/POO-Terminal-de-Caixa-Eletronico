@@ -46,6 +46,26 @@ public class Caixa {
         destino.creditaValor(valor, "Transferencia");
         return true;
     }
+    public boolean depositoEmEnvelope(int numeroContaDestino, double valor) {
+        Conta destino = bdContas.buscaConta(numeroContaDestino);
+
+        if(destino == null) {
+            return false;
+        }
+        destino.creditaValor(valor, "Deposito");
+        this.saldo += valor;
+        return true;
+    }
+    public boolean depositoEmDinheiro(int numeroContaDestino, double valor) {
+        Conta destino = bdContas.buscaConta(numeroContaDestino);
+
+        if(destino == null) {
+            return false;
+        }
+        destino.creditaValor(valor, "Deposito");
+        this.saldo += valor;
+        return true;
+    }
     public void recarrega() {
         this.saldo = 2000;
         this.meuTerminal.setModo(1);
