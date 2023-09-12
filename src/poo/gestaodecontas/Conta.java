@@ -44,6 +44,13 @@ public class Conta {
         this.historico.insereLancamento(new Lancamento(operacaoBancaria, valor));
         return true;
     }
+    public boolean extrato(int senha) {
+        if(senhaEhValida(senha)) {
+            System.out.println(historico.geraHistoricoDeLancamentos());
+            return  true;
+        }
+        return false;
+    }
     public boolean senhaEhValida(int senha) {
         return this.senha == senha;
     }

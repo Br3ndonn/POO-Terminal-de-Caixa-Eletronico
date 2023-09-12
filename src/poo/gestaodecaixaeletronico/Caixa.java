@@ -1,7 +1,5 @@
 package poo.gestaodecaixaeletronico;
-
-import poo.gestaodecontas.Conta;
-import poo.gestaodecontas.Lancamento;
+import poo.gestaodecontas.*;
 
 public class Caixa {
     private Terminal meuTerminal;
@@ -64,6 +62,14 @@ public class Caixa {
         }
         destino.creditaValor(valor, "Deposito");
         this.saldo += valor;
+        return true;
+    }
+    public boolean geraExtrato(int numeroConta, int senha) {
+        Conta conta = bdContas.buscaConta(numeroConta);
+        if(conta == null || !conta.extrato(senha)) {
+            return false;
+        }
+        System.out.println("\nSaldo Atual: " + conta.varificaSaldo(senha));
         return true;
     }
     public void recarrega() {

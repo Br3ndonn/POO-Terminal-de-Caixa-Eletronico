@@ -21,7 +21,7 @@ public class HistoricoDeLancamentos {
     public String geraHistoricoDeLancamentos() {
         StringBuilder historico = new StringBuilder();
         for(int i = 0; i < this.ultimoLancamento; i++) {
-            historico.append(this.lancamentos[i].getDescicao())
+            historico.append(this.lancamentos[i].getDescricao())
                     .append(": R$")
                     .append(this.lancamentos[i].getValor())
                     .append("\n");

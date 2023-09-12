@@ -1,16 +1,16 @@
 package poo.gestaodecontas;
 
 public class Lancamento {
-    private String descicao;
+    private String descricao;
     private double valor;
 
     public Lancamento(String descricao, double valor) {
         this.valor = valor;
-        this.descicao = descricao;
+        this.descricao = descricao;
     }
 
-    public String getDescicao() {
-        return descicao;
+    public String getDescricao() {
+        return descricao;
     }
 
     public double getValor() {

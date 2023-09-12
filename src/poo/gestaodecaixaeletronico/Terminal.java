@@ -1,4 +1,6 @@
 package poo.gestaodecaixaeletronico;
+import poo.gestaodecontas.HistoricoDeLancamentos;
+
 import java.util.Scanner;
 
 public class Terminal {
@@ -52,6 +54,12 @@ public class Terminal {
                         System.out.println("Erro na transferencia");
                     }
                     break;
+                case 7: boolean f = this.meuCaixa.geraExtrato(getInt("Numero"), getInt("Senha"));
+                    if(f) {
+                        System.out.println("Extrato da conta");
+                    } else {
+                        System.out.println("Erro");
+                    }
             }
             opcao = getOpcao();
         }
