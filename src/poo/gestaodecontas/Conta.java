@@ -45,11 +45,11 @@ public class Conta {
         return true;
     }
     public boolean extrato(int senha) {
-        if(senhaEhValida(senha)) {
-            System.out.println(historico.geraHistoricoDeLancamentos());
-            return  true;
-        }
-        return false;
+    	if(!senhaEhValida(senha)) {
+    		return false;
+    	}
+    	System.out.println(historico.geraHistoricoDeLancamentos());
+		return true;
     }
     public boolean senhaEhValida(int senha) {
         return this.senha == senha;

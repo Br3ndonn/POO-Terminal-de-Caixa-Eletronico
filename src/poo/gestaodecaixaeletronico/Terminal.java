@@ -1,6 +1,4 @@
 package poo.gestaodecaixaeletronico;
-import poo.gestaodecontas.HistoricoDeLancamentos;
-
 import java.util.Scanner;
 
 public class Terminal {
@@ -10,7 +8,7 @@ public class Terminal {
     public Terminal(CadastroContas bd) {
         this.meuCaixa = new Caixa(this, bd);
     }
-
+    
     public void iniciaOperacao() {
         int opcao;
 
@@ -18,78 +16,80 @@ public class Terminal {
         while(opcao != 8) {
             switch (opcao) {
                 case 1: double saldo = this.meuCaixa.consultaSaldo(getInt("Numero da Conta"), getInt("Senha"));
-                    if(saldo != -1) {
-                        System.out.println("Saldo atual: " + saldo);
-                    }else{
-                        System.out.println("Conta/senha invalida");
-                    }
-                    break;
+	                    if(saldo != -1) {
+	                        System.out.println("Saldo atual: " + saldo);
+	                    }else{
+	                        System.out.println("Conta/senha invalida");
+	                    }
+	                    break;
                 case 2: boolean b = this.meuCaixa.efetuaSaque(getInt("Numero da Conta"), (double) getInt("Valor"), getInt("Senha"));
-                    if(b) {
-                        System.out.println("Retire o dinheiro");
-                    }else {
-                        System.out.println("Pedido de saque recusaod");
-                    }
-                    break;
+	                    if(b) {
+	                        System.out.println("Retire o dinheiro");
+	                    }else {
+	                        System.out.println("Pedido de saque recusado");
+	                    }
+	                    break;
                 case 3: this.meuCaixa.recarrega();
-                    break;
-                case 4: boolean c = this.meuCaixa.transferencia(getInt("Conta pagadora"), getInt("Conta destino"), (double) getInt("Valor"), getInt("Senha"));
-                    if(c) {
-                        System.out.println("Transferencia realizada");
-                    } else {
-                        System.out.println("Erro na transferencia");
-                    }
-                    break;
-                case 5: boolean d = this.meuCaixa.depositoEmEnvelope(getInt("Conta destino"), getInt("Valor"));
-                    if(d) {
-                        System.out.println("Transferencia realizada");
-                    } else{
-                        System.out.println("Erro na transferencia");
-                    }
-                    break;
-                case 6: boolean e = this.meuCaixa.depositoEmDinheiro(getInt("Conta destino"), getInt("Valor"));
-                    if(e) {
-                        System.out.println("Transferencia realizada");
-                    } else {
-                        System.out.println("Erro na transferencia");
-                    }
-                    break;
-                case 7: boolean f = this.meuCaixa.geraExtrato(getInt("Numero"), getInt("Senha"));
-                    if(f) {
-                        System.out.println("Extrato da conta");
-                    } else {
-                        System.out.println("Erro");
-                    }
+                    	break;
+                case 4: boolean c = this.meuCaixa.transferencia(getInt("Conta de origem"), getInt("Conta de destino"), (double) getInt("Valor"), getInt("Senha"));
+	                    if(c) {
+	                        System.out.println("Transferencia efetuada");
+	                    }else{
+	                        System.out.println("Erro na transferencia");
+	                    }
+	                    break;
+                case 5: boolean d = this.meuCaixa.depositoEmEnvelope(getInt("Conta de destino"), getInt("Valor"));
+	                	if(d) {
+	                		System.out.println("Deposito efetuado");
+	                	} else {
+	                		System.out.println("Erro no deposito");
+	                	}
+	                	break;
+                case 6: boolean e = this.meuCaixa.depositoEmDinheiro(getInt("Conta de destino"), getInt("Valor"));
+	                	if(e) {
+	                		System.out.println("Deposito efetuado");
+	                	} else {
+	                		System.out.println("Erro no deposito");
+	                	}
+	                	break;
+                case 7: boolean f = this.meuCaixa.geraExtrato(getInt("Conta"), getInt("Senha"));
+                		if(f) {
+                			System.out.println("Extrato da conta");
+                		} else {
+                			System.out.println("Erro");
+                		}
+                
             }
             opcao = getOpcao();
         }
     }
-
+    
     public void setModo(int modo) {
         if(modo == 0 || modo == 1) {
             this.modoAtual = modo;
         }
     }
-
+    
     private int getOpcao() {
         int opcao = 0;
         do {
             if(this.modoAtual == 1) {
-                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Transferencia,"
-                                        + "5 - Deposito(Envelope), 6- Deposito(Dinheiro),"
-                                        + "7 - Extrato, 8 - Sair");
-                if(opcao != 1 & opcao != 2 & opcao != 4 & opcao != 5 & opcao != 6 & opcao != 7 & opcao != 8) {
+                opcao = getInt("Opcao: 1 - Consulta saldo, 2 - Saque, 4 - Transferencia, "
+                					+ "5 - Deposito(envelope), 6 - Deposito(dinheiro), "
+                					+ "7 - Consultar extrato,  8 - Sair");
+                if(opcao != 1 & opcao != 2 & opcao != 4 &opcao != 5 & opcao != 6 & opcao !=7 & opcao != 8) {
                     opcao = 0;
-                }else {
+                }
+            } else {
                     opcao = getInt("Opcao: 3 - Recarrega, 8 - Sair");
                     if(opcao != 3 & opcao != 8) {
                         opcao = 0;
-                    }
                 }
             }
         }while(opcao == 0);
         return opcao;
     }
+    
     private int getInt(String string) {
         Scanner r = new Scanner(System.in);
         System.out.println("Entre com: " + string);
